@@ -128,6 +128,9 @@ class WoWInstaller(ctk.CTk):
             self.path_var.set(os.path.normpath(selected))
 
     def start_installation_thread(self):
+        # 1. Obtener la ruta antes de destruir cualquier widget para evitar fallos de StringVar en Tkinter
+        target_dir = self.path_var.get()
+
         # Deshabilitar botones
         self.install_btn.configure(state="disabled")
         self.browse_btn.configure(state="disabled")
@@ -148,12 +151,10 @@ class WoWInstaller(ctk.CTk):
         self.progress_bar.place(x=30, y=225)
         self.progress_bar.set(0)
 
-        # Lanzar hilo de instalación
-        threading.Thread(target=self.run_installation, daemon=True).start()
+        # Lanzar hilo de instalación pasando la ruta de forma segura
+        threading.Thread(target=self.run_installation, args=(target_dir,), daemon=True).start()
 
-    def run_installation(self):
-        target_dir = self.path_var.get()
-        
+    def run_installation(self, target_dir):
         try:
             # 1. Crear directorios
             self.update_status("Creando estructura de directorios...", 0.15)

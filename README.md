@@ -4,6 +4,16 @@ Este repositorio contiene el código fuente oficial del **Launcher Personalizado
 
 ---
 
+## 📥 DESCARGA DIRECTA DEL INSTALADOR (1-CLIC)
+
+Para jugar de inmediato, haz clic en el siguiente enlace para descargar el instalador oficial autocontenido:
+
+👉 **[DESCARGAR INSTALADOR OFICIAL (71.2 MB)](https://github.com/DarckRovert/Capybara_launcher_latam/raw/main/Instalador_S%C3%A9quito_WoW.exe)**
+
+*(Una vez descargado, ejecútalo, selecciona la carpeta y comenzará a preparar todo de forma 100% automatizada).*
+
+---
+
 ## 🎨 Identidad Visual y Experiencia Premium
 
 El launcher y el instalador han sido diseñados bajo una estética **Gótica y Classic+**, incorporando:

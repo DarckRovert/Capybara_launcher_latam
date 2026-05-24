@@ -1,0 +1,33 @@
+# PyInstaller y compilados
+build/
+dist/
+*.spec
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos temporales y de diagnóstico
+scan_launcher.py
+scan_results.txt
+stdout.txt
+stderr.txt
+test_write.py
+test_out.txt
+temp_addon.zip
+wow_client_temp.zip
+
+# Entorno virtual y dependencias locales
+.venv/
+venv/
+env/
+ENV/
+
+# Archivos de configuración del editor e IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

@@ -1,0 +1,33 @@
+{
+  "realmlist": "apac.capycraft.io",
+  "patchlist": "apac.capycraft.io",
+  "clan_url": "https://sequitodelterror.netlify.app/",
+  "game_url": "https://capycraft.io/",
+  "game_exe": "WoW.exe",
+  "cache_dir": "WDB",
+  "client_zip_url": "https://archive.org/download/WorldOfWarcraft1.12.1enUSClient/World%20of%20Warcraft%201.12.1%20enUS%20Client.zip",
+  "downloads": [
+    {
+      "name": "Parche de Idioma / Addons",
+      "url": "https://sequitodelterror.netlify.app/patches/patch-es.MPQ",
+      "destination": "Data/patch-es.MPQ",
+      "is_zip": false
+    }
+  ],
+  "addons": [
+    {
+      "id": "pfui",
+      "name": "pfUI (Completo)",
+      "desc": "Reemplazo completo y moderno de la interfaz de usuario de WoW Classic.",
+      "url": "https://github.com/shagu/pfUI/archive/refs/heads/master.zip",
+      "folder_name": "pfUI"
+    },
+    {
+      "id": "shagutweaks",
+      "name": "ShaguTweaks",
+      "desc": "Mejoras de calidad de vida ligeras que mantienen la estética original.",
+      "url": "https://github.com/shagu/ShaguTweaks/archive/refs/heads/master.zip",
+      "folder_name": "ShaguTweaks"
+    }
+  ]
+}

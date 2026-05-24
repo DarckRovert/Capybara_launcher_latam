@@ -8,7 +8,7 @@ Este repositorio contiene el código fuente oficial del **Launcher Personalizado
 
 Para jugar de inmediato, haz clic en el siguiente enlace para descargar el instalador oficial autocontenido:
 
-👉 **[DESCARGAR INSTALADOR OFICIAL (71.2 MB)](https://github.com/DarckRovert/Capybara_launcher_latam/raw/main/Instalador_S%C3%A9quito_WoW.exe)**
+👉 **[DESCARGAR INSTALADOR OFICIAL (71.2 MB)](https://github.com/DarckRovert/Capybara_launcher_latam/raw/main/Instalador_Sequito_WoW.exe)**
 
 *(Una vez descargado, ejecútalo, selecciona la carpeta y comenzará a preparar todo de forma 100% automatizada).*
 
@@ -34,7 +34,7 @@ El launcher y el instalador han sido diseñados bajo una estética **Gótica y C
 *   **Detección de Archivos:** Si el launcher se ejecuta y no detecta el archivo `WoW.exe`, el botón principal cambia dinámicamente a **"DESCARGAR JUEGO"** (en color naranja medieval) e informa al usuario sobre el estado.
 *   **Descargador Multihilo Asíncrono:** Utiliza la librería `requests` para descargar de forma fluida el cliente completo de WoW Classic 1.12.1 en segundo plano desde un mirror optimizado y permanente de **Internet Archive (Archive.org)**.
 *   **Telemetría de Descarga:** Reporta en tiempo real el porcentaje completado en la barra de progreso, la velocidad en **MB/s** y el tiempo estimado restante (**ETA**).
-*   **Descompresión y Despliegue Inteligente:** Al descargar el archivo `.zip`, el motor lo extrae y detecta automáticamente si los archivos de juego están anidados dentro de una subcarpeta. De ser así, mueve los archivos core a la raíz y limpia las subcarpetas vacías.
+*   **Descompresión y Despliegue Inteligente:** Al descargar el archivo `.zip`, el motor lo extrae y detecta automáticamente si los archivos de juego están aninados dentro de una subcarpeta. De ser así, mueve los archivos core a la raíz y limpia las subcarpetas vacías.
 *   **Activación Inmediata:** Al completarse la instalación, auto-escribe el realmlist y el botón cambia de forma fluida al color carmesí de **"JUGAR"**.
 
 ### 🔌 3. Selector de Idiomas Nativo (Locale Switcher)
@@ -70,20 +70,20 @@ pip install customtkinter Pillow requests pypresence pywin32 pyinstaller
 Tanto el launcher como el instalador son empaquetados como ejecutables portátiles independientes (`.exe`) sin dependencias externas usando **PyInstaller**:
 
 ### 🛡️ Compilar el Launcher Oficial:
-Ejecuta el siguiente comando en PowerShell desde la carpeta raíz del código fuente para compilar el Launcher (`Séquito del Terror Launcher.exe`):
+Ejecuta el siguiente comando en PowerShell desde la carpeta raíz del código fuente para compilar el Launcher (`SequitoLauncher.exe`):
 
 ```powershell
-pyinstaller --noconsole --onefile --icon=assets/logo.ico --add-data 'assets;assets' --add-data 'config.json;.' --name 'Séquito del Terror Launcher' launcher.py
+pyinstaller --noconsole --onefile --icon=assets/logo.ico --add-data 'assets;assets' --add-data 'config.json;.' --name 'SequitoLauncher' launcher.py
 ```
 *Nota: Copia el ejecutable generado en `dist/` y colócalo en la carpeta `launcher-src/` para que el instalador pueda embeberlo.*
 
 ### 📦 Compilar el Instalador de Escritorio:
-Ejecuta el siguiente comando para generar el instalador autocontenido (`Instalador_Séquito_WoW.exe`) que incluye el launcher y los recursos:
+Ejecuta el siguiente comando para generar el instalador autocontenido (`Instalador_Sequito_WoW.exe`) que incluye el launcher y los recursos:
 
 ```powershell
-pyinstaller --noconsole --onefile --icon=assets/logo.ico --add-data 'assets;assets' --add-data 'config.json;.' --add-data 'Séquito del Terror Launcher.exe;.' --name 'Instalador_Séquito_WoW' installer.py
+pyinstaller --noconsole --onefile --icon=assets/logo.ico --add-data 'assets;assets' --add-data 'config.json;.' --add-data 'SequitoLauncher.exe;.' --name 'Instalador_Sequito_WoW' installer.py
 ```
-*Nota: El archivo `Instalador_Séquito_WoW.exe` resultante en `dist/` es el único archivo que necesitas compartir con tus usuarios. Mide ~74.9MB y maneja todo de forma completamente autónoma.*
+*Nota: El archivo Instalador_Sequito_WoW.exe resultante en dist/ es el único archivo que necesitas compartir con tus usuarios. Mide ~74.9MB y maneja todo de forma completamente autónoma.*
 
 ---
 

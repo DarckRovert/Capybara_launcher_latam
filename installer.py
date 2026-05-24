@@ -2,9 +2,19 @@ import os
 import sys
 import shutil
 import threading
+import subprocess
 from tkinter import filedialog
 from PIL import Image
 import customtkinter as ctk
+
+# Redirigir errores de forma segura a un archivo de log local para diagnóstico
+log_path = os.path.join(os.path.dirname(sys.executable if getattr(sys, 'frozen', False) else __file__), "installer_debug.log")
+try:
+    sys.stdout = open(log_path, "w", encoding="utf-8")
+    sys.stderr = sys.stdout
+    print("--- INICIANDO DEPURACIÓN DEL INSTALADOR ---")
+except Exception:
+    pass
 
 # Importación segura de win32com para crear accesos directos
 try:
@@ -144,8 +154,8 @@ class WoWInstaller(ctk.CTk):
         # Crear barra de progreso e indicador de estado
         self.status_lbl = ctk.CTkLabel(self.main_card, text="Iniciando instalación...", 
                                        font=ctk.CTkFont(family="Inter", size=13, weight="bold"), 
-                                       text_color="#E0E0E0", anchor="w")
-        self.status_lbl.place(x=30, y=190, width=625)
+                                       text_color="#E0E0E0", anchor="w", width=625)
+        self.status_lbl.place(x=30, y=190)
 
         self.progress_bar = ctk.CTkProgressBar(self.main_card, width=625, height=10, progress_color="#A83232", fg_color="#222222")
         self.progress_bar.place(x=30, y=225)

@@ -180,14 +180,16 @@ class WoWInstaller(ctk.CTk):
             if os.path.exists(src_config):
                 shutil.copy2(src_config, os.path.join(target_dir, "config.json"))
 
-            # 5. Copiar el ejecutable del launcher portátil
-            self.update_status("Copiando Séquito del Terror Launcher.exe...", 0.85)
-            src_launcher = resource_path("Séquito del Terror Launcher.exe")
+            # 5. Copiar el ejecutable del launcher portátil (ASCII Seguro)
+            self.update_status("Copiando SequitoLauncher.exe...", 0.85)
+            src_launcher = resource_path("SequitoLauncher.exe")
             if not os.path.exists(src_launcher):
-                src_launcher = os.path.join(os.path.dirname(sys.executable if getattr(sys, 'frozen', False) else __file__), "Séquito del Terror Launcher.exe")
+                src_launcher = os.path.join(os.path.dirname(sys.executable if getattr(sys, 'frozen', False) else __file__), "SequitoLauncher.exe")
 
             if os.path.exists(src_launcher):
-                shutil.copy2(src_launcher, os.path.join(target_dir, "Séquito del Terror Launcher.exe"))
+                shutil.copy2(src_launcher, os.path.join(target_dir, "SequitoLauncher.exe"))
+            else:
+                raise FileNotFoundError("No se encontró el ejecutable SequitoLauncher.exe para copiar.")
 
             # 6. Crear accesos directos
             self.update_status("Creando acceso directo oficial en tu Escritorio...", 0.95)
@@ -221,7 +223,7 @@ class WoWInstaller(ctk.CTk):
             # 1. Escritorio
             desktop_path = shell.SpecialFolders("Desktop")
             shortcut_desktop = shell.CreateShortCut(os.path.join(desktop_path, "Séquito del Terror WoW.lnk"))
-            shortcut_desktop.TargetPath = os.path.join(install_dir, "Séquito del Terror Launcher.exe")
+            shortcut_desktop.TargetPath = os.path.join(install_dir, "SequitoLauncher.exe")
             shortcut_desktop.WorkingDirectory = install_dir
             shortcut_desktop.IconLocation = os.path.join(install_dir, "assets", "logo.ico")
             shortcut_desktop.Description = "Launcher Oficial del Clan Séquito del Terror para Capycraft.io"
@@ -230,7 +232,7 @@ class WoWInstaller(ctk.CTk):
             # 2. Menú Inicio
             programs_path = shell.SpecialFolders("Programs")
             shortcut_menu = shell.CreateShortCut(os.path.join(programs_path, "Séquito del Terror WoW.lnk"))
-            shortcut_menu.TargetPath = os.path.join(install_dir, "Séquito del Terror Launcher.exe")
+            shortcut_menu.TargetPath = os.path.join(install_dir, "SequitoLauncher.exe")
             shortcut_menu.WorkingDirectory = install_dir
             shortcut_menu.IconLocation = os.path.join(install_dir, "assets", "logo.ico")
             shortcut_menu.Description = "Launcher Oficial del Clan Séquito del Terror para Capycraft.io"
@@ -240,7 +242,7 @@ class WoWInstaller(ctk.CTk):
 
     def finalize_installation(self, install_dir):
         # Lanzar el launcher recién instalado
-        launcher_path = os.path.join(install_dir, "Séquito del Terror Launcher.exe")
+        launcher_path = os.path.join(install_dir, "SequitoLauncher.exe")
         if os.path.exists(launcher_path):
             try:
                 subprocess.Popen([launcher_path], cwd=install_dir, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)

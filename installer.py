@@ -71,6 +71,7 @@ class WoWInstaller(ctk.CTk):
         self.main_card = ctk.CTkFrame(self, width=690, height=380, fg_color="#0F0F0F", corner_radius=15,
                                       border_color="#A83232", border_width=1)
         self.main_card.place(x=30, y=35)
+        self.main_card.lift()
 
         # Logotipo gótico
         if self.logo_image:

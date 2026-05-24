@@ -124,6 +124,7 @@ class WoWLauncher(ctk.CTk):
         self.nav_frame = ctk.CTkFrame(self, width=880, height=50, fg_color="#0F0F0F", corner_radius=10, 
                                       border_color="#A83232", border_width=1)
         self.nav_frame.place(x=20, y=20)
+        self.nav_frame.lift()
 
         self.tab_noticias_btn = ctk.CTkButton(self.nav_frame, text="📰 NOTICIAS Y ESTADO", font=self.tab_font,
                                               fg_color="#A83232", hover_color="#801D1D", text_color="#FFFFFF",
@@ -148,6 +149,7 @@ class WoWLauncher(ctk.CTk):
         # 4. Contenedor de Contenido Principal Dinámico
         self.content_container = ctk.CTkFrame(self, width=880, height=340, fg_color="transparent")
         self.content_container.place(x=20, y=85)
+        self.content_container.lift()
 
         # Inicializar Pestañas en Memoria
         self.switch_tab("noticias")
@@ -156,6 +158,7 @@ class WoWLauncher(ctk.CTk):
         self.control_frame = ctk.CTkFrame(self, width=880, height=105, fg_color="#0A0A0A", corner_radius=12,
                                           border_color="#2D2D2D", border_width=1)
         self.control_frame.place(x=20, y=440)
+        self.control_frame.lift()
 
         # Botón gigante JUGAR
         self.play_btn = ctk.CTkButton(self.control_frame, text="JUGAR", font=self.play_font,

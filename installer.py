@@ -14,6 +14,7 @@ except ImportError:
     SHORTCUTS_AVAILABLE = False
 
 # Configuración básica de CustomTkinter
+ctk.deactivate_automatic_dpi_awareness()
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 

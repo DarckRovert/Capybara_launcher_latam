@@ -77,13 +77,14 @@ pyinstaller --noconsole --onefile --icon=assets/logo.ico --add-data 'assets;asse
 ```
 *Nota: Copia el ejecutable generado en `dist/` y colócalo en la carpeta `launcher-src/` para que el instalador pueda embeberlo.*
 
-### 📦 Compilar el Instalador de Escritorio:
-Ejecuta el siguiente comando para generar el instalador autocontenido (`Instalador_Sequito_WoW.exe`) que incluye el launcher y los recursos:
+### 📦 Compilar el Instalador de Escritorio Autocontenido (Recomendado):
+Para evitar problemas de red y bloqueos de antivirus en los ordenadores de los jugadores, hemos abandonado el instalador ligero de Python. En su lugar, utilizamos un instalador profesional con **Inno Setup** que empaqueta tu cliente completo de 5GB.
 
-```powershell
-pyinstaller --noconsole --onefile --icon=assets/logo.ico --add-data 'assets;assets' --add-data 'config.json;.' --add-data 'SequitoLauncher.exe;.' --name 'Instalador_Sequito_WoW' installer.py
-```
-*Nota: El archivo Instalador_Sequito_WoW.exe resultante en dist/ es el único archivo que necesitas compartir con tus usuarios. Mide ~74.9MB y maneja todo de forma completamente autónoma.*
+1. Instala **Inno Setup** (estándar de la industria) en tu ordenador.
+2. Asegúrate de tener todos los archivos del juego (WoW.exe, Data, etc.) en la carpeta raíz.
+3. Haz doble clic en el archivo `build_installer.iss` ubicado en la carpeta raíz.
+4. Presiona el botón **Compile** en Inno Setup.
+*Nota: Te generará un instalador masivo en la carpeta `Output/`. Sube este único instalador a tu Google Drive para que los jugadores lo descarguen a máxima velocidad.*
 
 ---
 

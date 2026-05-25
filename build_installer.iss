@@ -21,6 +21,8 @@ WizardStyle=modern
 ; Compresión (Extrema para empaquetar 5GB)
 Compression=lzma2/ultra64
 SolidCompression=yes
+DiskSpanning=yes
+DiskSliceSize=max
 
 [Languages]
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"

@@ -4,13 +4,13 @@ Este repositorio contiene el código fuente oficial del **Launcher Personalizado
 
 ---
 
-## 📥 DESCARGA DIRECTA DEL INSTALADOR (1-CLIC)
+## 📥 DESCARGA DIRECTA DEL JUEGO COMPLETO
 
-Para jugar de inmediato, haz clic en el siguiente enlace para descargar el instalador oficial autocontenido:
+Para jugar de inmediato, descarga el cliente completo preconfigurado del Séquito del Terror desde Google Drive. Este cliente ya incluye el Launcher, todos los Addons preconfigurados y los parches de traducción listos para usar:
 
-👉 **[DESCARGAR INSTALADOR OFICIAL (71.2 MB)](https://github.com/DarckRovert/Capybara_launcher_latam/raw/main/Instalador_Sequito_WoW.exe)**
+👉 **[DESCARGAR CLIENTE COMPLETO (Google Drive) - ENLACE PENDIENTE](#)**
 
-*(Una vez descargado, ejecútalo, selecciona la carpeta y comenzará a preparar todo de forma 100% automatizada).*
+*(Una vez descargado, extrae la carpeta en tu disco duro, entra y ejecuta **Séquito del Terror Launcher.exe** para empezar a jugar).*
 
 ---
 

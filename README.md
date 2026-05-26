@@ -8,7 +8,7 @@ Este repositorio contiene el código fuente oficial del **Launcher Personalizado
 
 Para jugar de inmediato, descarga el cliente completo preconfigurado del Séquito del Terror desde Google Drive. Este cliente ya incluye el Launcher, todos los Addons preconfigurados y los parches de traducción listos para usar:
 
-👉 **[DESCARGAR CLIENTE COMPLETO (Google Drive) - ENLACE PENDIENTE](#)**
+👉 **[DESCARGAR CLIENTE COMPLETO (Google Drive)](https://drive.google.com/file/d/18XohZwE6kV7IU4VFCOmarzF3aeaiPKAS/view?usp=sharing)**
 
 *(Una vez descargado, extrae la carpeta en tu disco duro, entra y ejecuta **Séquito del Terror Launcher.exe** para empezar a jugar).*
 

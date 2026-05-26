@@ -299,6 +299,9 @@ class WoWLauncher(ctk.CTk):
             desc = addon["desc"]
             folder = addon["folder_name"]
             url = addon.get("url", "")
+            github_repo = addon.get("github_repo", "")
+            if not url and github_repo:
+                url = f"https://api.github.com/repos/{github_repo}/zipball"
 
             item_frame = ctk.CTkFrame(scroll_frame, height=80, fg_color="#1A1A1A", corner_radius=8)
             item_frame.pack(fill="x", padx=15, pady=8)
@@ -331,6 +334,8 @@ class WoWLauncher(ctk.CTk):
                                    hover_color="#801D1D" if not installed else "#3D3D3D",
                                    width=130, height=32, corner_radius=6,
                                    command=lambda u=url, f=folder, i=item_frame: self.install_addon_async(u, f, i))
+            if not url:
+                btn_dl.configure(state="disabled", text="NO DISP.", fg_color="#333333")
             btn_dl.place(x=660, y=20)
 
     def render_ajustes_tab(self):

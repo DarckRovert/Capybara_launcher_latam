@@ -28,6 +28,13 @@
       "desc": "Mejoras de calidad de vida ligeras que mantienen la estética original.",
       "url": "https://github.com/shagu/ShaguTweaks/archive/refs/heads/master.zip",
       "folder_name": "ShaguTweaks"
+    },
+    {
+      "id": "questvoice",
+      "name": "QuestVoice",
+      "desc": "Asistente de misiones con voiceover y zoom de mapa para Turtle WoW.",
+      "github_repo": "DarckRovert/QuestVoice-El-Sequito-del-Terror-Edition",
+      "folder_name": "QuestVoice"
     }
   ]
 }

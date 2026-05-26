@@ -93,3 +93,12 @@ Para evitar problemas de red y bloqueos de antivirus en los ordenadores de los j
 *   **Página Oficial de Capycraft:** https://capycraft.io/
 *   **Sitio del Clan El Séquito del Terror:** https://sequitodelterror.netlify.app/
 *   **Desarrollo Técnico y Estabilidad:** Google DeepMind Advanced Agentic Coding Team.
+
+## 📝 Notas de la Versión (Changelog)
+
+### [V2.1.0] - 2026-05-26
+- **Fix Crítico de Idioma (GlueStrings)**: El Launcher ahora renombra dinámicamente el archivo \Data/GlueStrings.lua\ a \.bak\ cuando se selecciona Español. Esto soluciona el problema crítico donde la pantalla de inicio se quedaba estancada en Inglés/Chino, ya que el archivo suelto anulaba el \patch-Z.mpq\.
+- **Integridad de Modificación pfUI Segura**: Refactorizado el sistema de escritura de la configuración de \pfUI\. En lugar de hacer expresiones regulares inestables que corrompían el SavedVariables, ahora el launcher inyecta código Lua nativo al final del archivo para forzar la configuración de idioma y región de forma 100% infalible.
+- **Addon Manager Fix**: Corregido un cuelgue (\KeyError: 'url'\) en el gestor de descargas de Addons cuando algún addon en \config.json\ no poseía dicho campo.
+- **Comprobación de Integridad**: Actualizada la comprobación de integridad para leer desde \Data/base.MPQ\ en lugar del descontinuado \common.MPQ\.
+

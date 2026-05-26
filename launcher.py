@@ -298,7 +298,7 @@ class WoWLauncher(ctk.CTk):
             name = addon["name"]
             desc = addon["desc"]
             folder = addon["folder_name"]
-            url = addon["url"]
+            url = addon.get("url", "")
 
             item_frame = ctk.CTkFrame(scroll_frame, height=80, fg_color="#1A1A1A", corner_radius=8)
             item_frame.pack(fill="x", padx=15, pady=8)
@@ -423,11 +423,61 @@ class WoWLauncher(ctk.CTk):
         }
         selected_locale = locale_map.get(selected_val, "enUS")
         self.write_wtf_setting("locale", selected_locale)
+        self.update_pfui_language(selected_locale)
+        self.toggle_language_patch(selected_locale)
         
         if selected_locale == "esES":
-            self.show_status("✓ Idioma Español configurado. ¡Instala pfUI en Addons para tener los textos traducidos!", "#D4AF37")
+            self.show_status("✓ Idioma Español configurado (Cliente y Addon).", "#D4AF37")
         else:
             self.show_status(f"✓ Idioma cambiado con éxito: {selected_locale}", "#2ECC71")
+
+    def toggle_language_patch(self, locale):
+        data_dir = "Data"
+        if not os.path.exists(data_dir):
+            return
+            
+        patch_es = os.path.join(data_dir, "patch-Z.mpq")
+        patch_es_bak = os.path.join(data_dir, "patch-Z.mpq.bak")
+        glue_strings = os.path.join(data_dir, "GlueStrings.lua")
+        glue_strings_bak = os.path.join(data_dir, "GlueStrings.lua.bak")
+        
+        try:
+            if locale == "esES":
+                if os.path.exists(patch_es_bak):
+                    os.rename(patch_es_bak, patch_es)
+                if os.path.exists(glue_strings):
+                    os.rename(glue_strings, glue_strings_bak)
+            else:
+                if os.path.exists(patch_es):
+                    os.rename(patch_es, patch_es_bak)
+                if os.path.exists(glue_strings_bak) and locale == "zhCN":
+                    # Only restore Chinese loose files if locale is Chinese
+                    os.rename(glue_strings_bak, glue_strings)
+        except Exception as e:
+            print(f"Error toggling language patch: {e}")
+
+    def update_pfui_language(self, locale):
+        account_dir = os.path.join("WTF", "Account")
+        if not os.path.exists(account_dir):
+            return
+            
+        force_region = "1" if locale in ["zhCN", "zhTW", "koKR"] else "0"
+        
+        for acc in os.listdir(account_dir):
+            acc_path = os.path.join(account_dir, acc)
+            if os.path.isdir(acc_path):
+                sv_dir = os.path.join(acc_path, "SavedVariables")
+                os.makedirs(sv_dir, exist_ok=True)
+                pfui_lua = os.path.join(sv_dir, "pfUI.lua")
+                
+                try:
+                    with open(pfui_lua, "a", encoding="utf-8") as f:
+                        f.write(f'\nif not pfUI_config then pfUI_config = {{}} end\n')
+                        f.write(f'if not pfUI_config["global"] then pfUI_config["global"] = {{}} end\n')
+                        f.write(f'pfUI_config["global"]["language"] = "{locale}"\n')
+                        f.write(f'pfUI_config["global"]["force_region"] = "{force_region}"\n')
+                except Exception as e:
+                    print(f"Error updating pfUI config for {acc}: {e}")
 
     # LÓGICA DE NEGOCIO Y OPERACIONES
     def check_addon_installed(self, folder_name):
@@ -540,7 +590,7 @@ class WoWLauncher(ctk.CTk):
         try:
             with open(wtf_path, "r", encoding="utf-8") as f:
                 for line in f:
-                    if setting_name in line:
+                    if line.strip().startswith(f'SET {setting_name} '):
                         # Extrae el valor entre las comillas
                         parts = line.split('"')
                         if len(parts) >= 3:
@@ -566,7 +616,7 @@ class WoWLauncher(ctk.CTk):
                 pass
 
         for idx, line in enumerate(lines):
-            if setting_name in line:
+            if line.strip().startswith(f'SET {setting_name} '):
                 lines[idx] = setting_line
                 found = True
                 break
@@ -628,7 +678,7 @@ class WoWLauncher(ctk.CTk):
     def check_game_integrity(self):
         # Verifica la presencia de archivos core de WoW
         missing = []
-        for file in [self.config["game_exe"], "realmlist.wtf", "SDL.dll", "Data/common.MPQ"]:
+        for file in [self.config["game_exe"], "realmlist.wtf", "SDL.dll", "Data/base.MPQ"]:
             if not os.path.exists(file):
                 missing.append(file)
         

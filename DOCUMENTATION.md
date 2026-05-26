@@ -70,27 +70,21 @@ El archivo `installer.py` realiza un despliegue completo del cliente de forma mo
 
 ---
 
-## 🔌 4. Lógica del Selector de Idioma (WTF Switcher)
+## 🔌 4. Lógica del Selector de Idioma (WTF Switcher y pfUI)
 
-El selector de idioma en `launcher.py` interactúa directamente con el sistema de configuración clásica de World of Warcraft (`WTF/Config.wtf`).
+El selector de idioma en `launcher.py` no solo interactúa con el sistema de configuración clásica de World of Warcraft (`WTF/Config.wtf`), sino que también inyecta variables directamente en el ecosistema de addons para sortear limitaciones del cliente original.
 
 ```
 [Launcher GUI Dropdown]
       │
-      ├──> Español (esES)  ──> Escribe SET locale "esES" en Config.wtf
-      ├──> English (enUS)  ──> Escribe SET locale "enUS" en Config.wtf
-      └──> 简体中文 (zhCN) ──> Escribe SET locale "zhCN" en Config.wtf
+      ├──> Español (esES)  ──> Config.wtf (SET locale "esES") + pfUI.lua (pfUI_config.global.language="esES") + Renombra GlueStrings
+      ├──> English (enUS)  ──> Config.wtf (SET locale "enUS") + pfUI.lua (pfUI_config.global.language="enUS") + Renombra GlueStrings
+      └──> 简体中文 (zhCN) ──> Config.wtf (SET locale "zhCN") + pfUI.lua (pfUI_config.global.language="zhCN") + Renombra GlueStrings
 ```
 
-### Código de Edición del Config.wtf:
-El cargador lee el archivo línea por línea. Si la variable de configuración ya existe, la reemplaza de manera segura; de lo contrario, la añade al final para no corromper otros parámetros de gráficos o sonido del jugador:
-```python
-def write_wtf_setting(self, setting_name, value):
-    wtf_path = os.path.join("WTF", "Config.wtf")
-    # ...
-    # Busca la cadena `SET setting_name` y la sobrescribe de forma limpia.
-    # ...
-```
+### Código de Edición Avanzada (Config.wtf y SavedVariables):
+Dado que el cliente Chino nativo devuelve constantemente `GetLocale() == "enUS"` porque su ejecutable base en disco no fue traducido internamente, el Launcher sobrescribe el archivo global de preferencias de pfUI (`WTF/Account/NOMBRE/SavedVariables/pfUI.lua`) anexando explícitamente el idioma para forzar que el addon cargue su traducción independientemente del idioma que reporte el motor binario del juego. Además, gestiona los archivos locales `GlueStrings.lua` sueltos en `Data/` para traducir la pantalla de Login y Selección de Personaje.
+
 
 ---
 
@@ -105,8 +99,9 @@ else:
     # Configura el botón en modo "DESCARGAR JUEGO" (Naranja)
 ```
 
-### 2. Algoritmo de Descarga e Información:
-La descarga utiliza lectura por bloques (`iter_content`) con medición de velocidad en tiempo real basada en delta de tiempo:
+### 2. Algoritmo de Descarga y Resolución de Addons por GitHub API:
+La descarga utiliza lectura por bloques (`iter_content`) con medición de velocidad en tiempo real basada en delta de tiempo.
+Si un addon carece de una URL directa en `config.json` pero posee un `"github_repo"`, el gestor construye automáticamente la URL usando la API de GitHub (`https://api.github.com/repos/REPO/zipball`). Esto garantiza que siempre se obtenga la última versión directamente desde el repositorio maestro del clan sin depender de enlaces estáticos. Si el addon no cuenta con ninguno de los dos parámetros, su botón de instalación se inhabilita por seguridad ("NO DISP.").
 ```python
 start_time = time.time()
 for chunk in r.iter_content(chunk_size=65536):
